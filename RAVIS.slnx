@@ -1,3 +1,4 @@
 <Solution>
-  <Project Path="RAVIS/RAVIS.csproj" />
+  <Project Path="src/Ravis.Core/Ravis.Core.csproj" />
+  <Project Path="src/Ravis.Examples/Ravis.Examples.csproj" />
 </Solution>
