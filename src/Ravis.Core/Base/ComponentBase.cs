@@ -27,7 +27,7 @@ namespace Ravis.Core.Base
             if (data is not TComponentRendererData typed)
             {
                 throw new InvalidOperationException(
-                    $"Render data for {typeof(TRenderer)} is not {typeof(TComponentRendererData)}, it is of type {data?.GetType() ?? typeof(void)}"
+                    $"[ComponentBase] Render data for {typeof(TRenderer)} is not {typeof(TComponentRendererData)}, it is of type {data?.GetType() ?? typeof(void)}"
                 );
             }
 

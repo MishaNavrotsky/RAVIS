@@ -22,8 +22,7 @@ namespace Ravis.Core.Base
             };
         }
 
-        public static void Execute<TBehavior, TRenderer>(ComponentBase component, TRenderer renderer)
-            where TRenderer : IRenderer
+        public static void Execute<TBehavior>(ComponentBase component, IRenderer renderer)
             where TBehavior : IBehavior
         {
             if (component == null) return;
@@ -32,20 +31,19 @@ namespace Ravis.Core.Base
             var rendererType = renderer.GetType();
             var componentType = component.GetType();
 
-            component.HasData<TRenderer>();
 
-            while (componentType != null)
+            var key = (behaviorType, rendererType, componentType);
+
+            if (!_registry.TryGetValue(key, out var action))
             {
-                var key = (behaviorType, rendererType, componentType);
-
-                if (_registry.TryGetValue(key, out var action))
-                {
-                    action(component, renderer);
-                    return;
-                }
-
-                componentType = componentType.BaseType;
+#if DEBUG
+                Console.WriteLine($"[BehaviorRegistry] No behavior found for {behaviorType.Name}/{rendererType.Name}/{componentType.Name}");
+#endif
+                return;
             }
+            action(component, renderer);
+
+
         }
     }
 }

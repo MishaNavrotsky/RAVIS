@@ -9,7 +9,7 @@ namespace Ravis.Core.Lifecycle
         public void Process(ComponentBase component, IRenderer renderer)
         {
             component.Build();
-            BehaviorRegistry.Execute<Build, IRenderer>(component, renderer);
+            BehaviorRegistry.Execute<Build>(component, renderer);
             foreach (var child in component.Children)
             {
                 Process(child, renderer);
@@ -18,8 +18,8 @@ namespace Ravis.Core.Lifecycle
             component.Layout();
             component.Render();
 
-            BehaviorRegistry.Execute<Layout, IRenderer>(component, renderer);
-            BehaviorRegistry.Execute<Render, IRenderer>(component, renderer);
+            BehaviorRegistry.Execute<Layout>(component, renderer);
+            BehaviorRegistry.Execute<Render>(component, renderer);
         }
     }
 }
